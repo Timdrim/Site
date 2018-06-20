@@ -1,0 +1,8 @@
+Main idea is to get to the level when using this SYSTEM it would be easier and more convinient
+to work on code, than with other tools.
+
+Выглядит так, что строгость разработки должна быть выше, чем средняя по больнице.
+Наверное стоит добавить conventions checker?
+
+In perspective I plan to add auto code generation, so that I can abstract OOP level
+similar to how it was done in Delphi, but on a next level.

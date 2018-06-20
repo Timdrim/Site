@@ -1,0 +1,53 @@
+import numpy as np
+import cv2 as cv
+import ObjectOrientedMath.MathObjects as MathObjects
+
+def _point_to_cv2(x, y, height):
+    x = int(x)
+    y = int(height - y)
+    return x, y
+
+    # bottom_left_openCV = (rect_upper_left[0], rect_bottom_right[1])
+    # font = cv2.FONT_HERSHEY_SIMPLEX
+    # cv2.putText(self.original_matrix, text, bottom_left_openCV, font,
+    #             fontScale=0.5, color=(255, 255, 255), thickness=1, lineType=cv2.LINE_AA)
+
+
+rectangle_color = (255, 255, 255)
+rectangle_thickness = 2
+# cv2.rectangle(swaped_matrix, (100, 100), (200, 200), color=(255, 255, 255), thickness=3)
+length = 400
+height = 600
+original_matrix = np.zeros((height, length, 3), np.uint8)
+
+x1, x2 = 200, 300
+y1, y2 = 150, 300
+# correct transformation when adding points with numpy
+original_matrix[int(height - y1), int(x1)] = (255, 255, 255)
+original_matrix[int(height - y2), int(x2)] = (0, 255, 0)
+
+# correct transformation when adding points and shapes with openCV
+rect_bottom_right = _point_to_cv2(x1, y1, 600)
+rect_upper_left = _point_to_cv2(x2, y2, 600)
+cv.rectangle(original_matrix,
+              rect_bottom_right,
+              rect_upper_left,
+              color=(255, 255, 255),
+              thickness=rectangle_thickness)
+
+bottom_left_openCV = (rect_upper_left[1], rect_bottom_right[1])
+font = cv.FONT_HERSHEY_SIMPLEX
+cv.putText(original_matrix, 'dddddddd', bottom_left_openCV, font,
+            fontScale=0.5, color=(255, 255, 255), thickness=1, lineType=cv.LINE_AA)
+
+
+while(1):
+    cv.imshow('img',original_matrix)
+    k = cv.waitKey(33)
+    if k==27:    # Esc key to stop
+        break
+    elif k==-1:  # normally -1 returned,so don't print it
+        continue
+    else:
+        print(k) # else print its value
+
